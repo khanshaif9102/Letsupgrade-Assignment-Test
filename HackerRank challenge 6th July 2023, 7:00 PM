@@ -138,7 +138,30 @@ Sample Output 0
 *  *
 Explanation 0
 Here N = 4, So each row should have N - 2 spaces which is 2. Thus the N rows(i.e, 4 rows) should be in the form (asterisk)(2 spaces)(asterisk)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Not answered!!!!!!!!!!!!!!!!!!!!!!
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    
+        Scanner sc=new Scanner(System.in);
+       
+        int n=sc.nextInt();
+    for(int row=1;row<=n;row++){
+        for(int col=1;col<=n;col++){
+            if(col==1||col==n){
+                System.out.print("*");
+            } else {
+                System.out.print(" ");
+            }
+        }
+        System.out.println();
+    }
+        
+    }
+}
 
 6. Leading spaces pyramid
 Take an integer N as input, print the corresponding pattern for N.
@@ -776,6 +799,28 @@ Sample Output 2
 Yes
 Explanation 2
 For A = 1001, reverse(A) = reverse(1001) = 1001, which is same as A.
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int A=sc.nextInt();
+        int r,sum=0,temp; 
+         temp=A;    
+       while(A>0){    
+       r=A%10;  //getting remainder  
+       sum=(sum*10)+r;    
+       A=A/10;    
+  }    
+       if(temp==sum)    
+      System.out.println("Yes");    
+      else    
+       System.out.println("No"); 
+    }
+}
 22. Inverted Half Pyramid 1
 Given an integer N, print the corresponding Inverted Half Pyramid pattern for N.
 Input Format
