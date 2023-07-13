@@ -41,7 +41,29 @@ class Compute
 }
 -----------------------------------------------------------------------------------
 3.> First and last occurrences of x
------> 
+
+class GFG
+{
+    ArrayList<Long> find(long arr[], int n, int x)
+    {
+        ArrayList<Long> a=new ArrayList<>();
+        long first=-1,last=-1;
+        for(int i=0;i<n;i++){
+            if(arr[i]==x){
+                first=i;
+                int j=i;
+                while(j<n && arr[j]==arr[i]){
+                    last=j;
+                    j++;
+                }
+                break;
+            }
+        }
+        a.add(first);
+        a.add(last);
+        return a;
+    }
+}
 -----------------------------------------------------------------------------------
 4.> Search an Element in an array
 class Solution{
@@ -62,6 +84,7 @@ class Solution{
 }
 ---------------------------------------------------------------------------------------------
 5.> Second Largest
+
 class Solution {
     int print2largest(int arr[], int n) {
         // code here
