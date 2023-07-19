@@ -1,0 +1,152 @@
+1.> Matrix Diagonal Sum:
+class Solution {
+    public int diagonalSum(int[][] mat) {
+         int n = mat.length;
+        int primaryDiagonalSum = 0;
+        int secondaryDiagonalSum = 0;
+
+        for (int i = 0; i < n; i++) {
+            primaryDiagonalSum += mat[i][i];
+            secondaryDiagonalSum += mat[i][n - i - 1];
+        }
+         if (n % 2 == 1) { // For odd-sized matrices, subtract the center element from the secondary diagonal sum
+            int center = n / 2;
+            secondaryDiagonalSum -= mat[center][center];
+        }
+
+        return primaryDiagonalSum + secondaryDiagonalSum;
+    }
+}
+
+2.> Rotate Image :-
+class Solution {
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+
+        // Step 1: Transpose the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+
+        // Step 2: Reverse each row
+        for (int i = 0; i < n; i++) {
+            int start = 0;
+            int end = n - 1;
+            while (start < end) {
+                int temp = matrix[i][start];
+                matrix[i][start] = matrix[i][end];
+                matrix[i][end] = temp;
+                start++;
+                end--;
+            }
+        }
+    }
+}
+
+3.> 59. Spiral Matrix II :-
+class Solution {
+    public int[][] generateMatrix(int n) {
+int[][] matrix = new int[n][n];
+        int num = 1; // Start with the first number
+        int top = 0;
+        int bottom = n - 1;
+        int left = 0;
+        int right = n - 1;
+
+        while (num <= n * n) {
+            for (int i = left; i <= right; i++) {
+                matrix[top][i] = num++;
+            }
+            top++;
+            for (int i = top; i <= bottom; i++) {
+                matrix[i][right] = num++;
+            }
+            right--;
+            for (int i = right; i >= left; i--) {
+                matrix[bottom][i] = num++;
+            }
+            bottom--;
+            for (int i = bottom; i >= top; i--) {
+                matrix[i][left] = num++;
+            }
+            left++;
+        }
+        return matrix;
+    }
+}
+
+4.> 867. Transpose Matrix : -
+class Solution {
+    public int[][] transpose(int[][] matrix) {
+          int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        int[][] transposeMatrix = new int[cols][rows];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                transposeMatrix[j][i] = matrix[i][j];
+            }
+        }
+        return transposeMatrix;
+    }
+}
+
+5.> 73. Set Matrix Zeroes : - 
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        boolean[] zeroRows = new boolean[m];
+        boolean[] zeroCols = new boolean[n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    zeroRows[i] = true;
+                    zeroCols[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (zeroRows[i] || zeroCols[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+  }
+
+6.> 1424. Diagonal Traverse II :
+-----------------------------------
+7.> Anti Diagonals:
+public class Solution {
+    public int[][] diagonal(int[][] A) {
+         int n = A.length;
+        int[][] result = new int[n + n - 1][];
+        for (int d = 0; d < n; d++) {
+            int diagonalLength = Math.min(d + 1, n);
+            result[d] = new int[diagonalLength];
+            for (int i = 0; i < diagonalLength; i++) {
+                int j = d - i;
+                result[d][i] = A[i][j];
+            }
+        }
+        for (int d = 1; d < n; d++) {
+            int diagonalLength = Math.min(n - d, n);
+            result[n + d - 1] = new int[diagonalLength];
+            for (int i = d; i < n; i++) {
+                int j = n - (i - d) - 1;
+                result[n + d - 1][i - d] = A[i][j];
+            }
+        }
+        return result;
+    }
+}
+
+
