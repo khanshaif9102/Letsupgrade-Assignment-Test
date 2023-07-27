@@ -1,0 +1,163 @@
+Equilibrium Index Element: -
+
+public class Solution {
+    public int solve(int[] A) {
+         int n = A.length;
+        // Calculate prefix sums of even-indexed and odd-indexed elements
+        int[] evenPrefixSum = new int[n + 1];
+        int[] oddPrefixSum = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                evenPrefixSum[i + 1] = evenPrefixSum[i] + A[i];
+                oddPrefixSum[i + 1] = oddPrefixSum[i];
+            } else {
+                evenPrefixSum[i + 1] = evenPrefixSum[i];
+                oddPrefixSum[i + 1] = oddPrefixSum[i] + A[i];
+            }
+        }
+         // Count the number of special elements
+        int specialCount = 0;
+        for (int i = 0; i < n; i++) {
+            int evenSumWithoutElement = evenPrefixSum[i] + oddPrefixSum[n] - oddPrefixSum[i + 1];
+            int oddSumWithoutElement = oddPrefixSum[i] + evenPrefixSum[n] - evenPrefixSum[i + 1];
+            if (evenSumWithoutElement == oddSumWithoutElement) {
+                specialCount++;
+            }
+        }
+        return specialCount;
+    }
+}
+
+
+Pick from both sides! : - 
+
+ import java.util.*;
+public class Solution {
+    public int solve(int[] A, int B) {
+         int n = A.length;
+        
+        // Calculate the initial sum of the first B elements.
+        int sum = 0;
+        for (int i = 0; i < B; i++) {
+            sum += A[i];
+        }
+        
+        // Initialize the maximum sum to the initial sum.
+        int maxSum = sum;
+         // Use a sliding window to update the sum by removing elements from the front
+        // and adding elements from the back.
+        for (int i = B - 1, j = n - 1; i >= 0; i--, j--) {
+            sum = sum - A[i] + A[j];
+            maxSum = Math.max(maxSum, sum);
+        }
+        
+        return maxSum;
+    }
+}
+
+1551. Minimum Operations to Make Array Equal: - 
+class Solution {
+    public int minOperations(int n) {
+         int target = n + 1;
+        int minOperations = 0;
+
+        for (int i = 0; i < n; i++) {
+            int currentElement = (2 * i) + 1;
+            minOperations += Math.abs(currentElement - target);
+        }
+
+        return minOperations / 2; 
+    }
+}
+
+ Range Sum Query – Immutable 
+class NumArray {
+ private int[] prefixSum;
+    public NumArray(int[] nums) {
+        int n = nums.length;
+        prefixSum = new int[n + 1];
+        
+        // Calculate the prefix sum array
+        for (int i = 1; i <= n; i++) {
+            prefixSum[i] = prefixSum[i - 1] + nums[i - 1];
+        }
+    }
+    
+    public int sumRange(int left, int right) {
+        // Calculate the sum between indices left and right inclusive
+        return prefixSum[right + 1] - prefixSum[left];
+    }
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * int param_1 = obj.sumRange(left,right);
+ */
+
+Equilibrium Point : -
+
+class Solution {  
+    // a: input array
+    // n: size of array
+    // Function to find equilibrium point in the array.
+    public static int equilibriumPoint(long arr[], int n) {
+        
+        // Calculate the total sum of all elements in the array.
+        long totalSum = 0;
+        for (long num : arr) {
+            totalSum += num;
+        }
+        // Initialize leftSum to 0, as there are no elements to the left of the first position.
+        long leftSum = 0;
+        
+        // Traverse the array and find the equilibrium point.
+        for (int i = 0; i < n; i++) {
+            // Calculate the sum of elements to the right of the current position.
+            long rightSum = totalSum - leftSum - arr[i];
+            // Check if the equilibrium point is found.
+            if (leftSum == rightSum) {
+                return i + 1; // Equilibrium point is at index i + 1 (1-based index).
+            }
+            // Update leftSum for the next iteration.
+            leftSum += arr[i];
+        }
+        
+        // If no equilibrium point is found, return -1 as per the problem statement.
+        return -1;
+    }
+}
+
+Product of Array Except Self : -
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        
+        // Initialize two arrays to store the product of elements to the left and right of each element.
+        int[] leftProducts = new int[n];
+        int[] rightProducts = new int[n];
+        
+        // Initialize the left product of the first element and the right product of the last element as 1.
+        leftProducts[0] = 1;
+        rightProducts[n - 1] = 1;
+        
+        // Calculate the product of elements to the left of each element.
+        for (int i = 1; i < n; i++) {
+            leftProducts[i] = leftProducts[i - 1] * nums[i - 1];
+        }
+        // Calculate the product of elements to the right of each element.
+        for (int i = n - 2; i >= 0; i--) {
+            rightProducts[i] = rightProducts[i + 1] * nums[i + 1];
+        }
+        
+        // Calculate the final product array.
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            result[i] = leftProducts[i] * rightProducts[i];
+        }
+        
+        return result;
+    }
+}
+
