@@ -1,0 +1,75 @@
+523. Continuous Subarray Sum: - 
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        Map<Integer,Integer> map=new HashMap<>(){{put(0,-1);}};;
+        int sum=0;
+        for(int i=0;i<nums.length;i++){
+        sum+=nums[i];
+        if(k!=0) sum%=k;
+        Integer prev=map.get(sum);
+        if(prev!=null){
+            if(i-prev>1) return true;
+        } else map.put(sum,i);
+        }
+        return false;
+    }
+}
+
+Subarray with least average
+
+class Solution
+{
+    public int least_average(int[] nums, int k)
+    {
+        int sum=0;
+        int n=nums.length;
+        if(k>n){
+            return -1;
+        }
+        for(int i=0;i<k;i++){
+            sum+=nums[i];
+        }
+        int min=sum,begin=0;
+        for(int i=0;i<n-k;i++){
+            sum=sum-nums[i]+nums[i+k];
+            if(sum<min){
+                min=sum;
+                begin=i+1;
+            }
+        }
+        return begin+1;
+    }
+}
+
+Sum of Subarrays
+
+class Solution {
+    public static long subarraySum( long a[], long n) {
+     long sum=0;
+     for(int i=0;i<n;i++)
+     {
+         long leftCount=i+1;
+         long rightCount=n-i;
+         sum+=a[i]*leftCount*rightCount;
+     }
+   return sum;
+    }
+}
+
+Maximum Subarray
+class Solution {
+    public int max(int a,int b){
+        if(a<b)
+        return b;
+        return a;
+    }
+    public int maxSubArray(int[] nums) {
+       int res=nums[0];
+       int maxE=nums[0];
+       for(int i=1;i<nums.length;i++){
+           maxE=max(maxE+nums[i],nums[i]);
+           res=max(res,maxE);
+       } 
+       return res;
+    }
+}
